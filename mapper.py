@@ -55,8 +55,12 @@ class MapParser:
         self.bounded_data=None
         self.route=None
         self.Graph=None
+ 
+    def download_data(self,filename,url):
+        if not os.path.exists(filename):
+            filename, headers = urllib.request.urlretrieve(url,filename)   
 
-        
+
     def get_pois_from_map(self,poi_filter=None):
         """
         poi_filter 
