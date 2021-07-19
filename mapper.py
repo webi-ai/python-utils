@@ -58,7 +58,13 @@ class MapParser:
  
     def download_data(self,filename,url):
         if not os.path.exists(filename):
-            filename, headers = urllib.request.urlretrieve(url,filename)   
+            filename, headers = urllib.request.urlretrieve(url,filename)  
+
+    def to_geojson(self):
+        if self.bounded_data:
+            return self.bounded_data.to_file(path, driver="GeoJSON")   
+        else
+            return self.osm_data.to_file(path, driver="GeoJSON")
 
 
     def get_pois_from_map(self,poi_filter=None):
@@ -220,4 +226,5 @@ class MapParser:
         target_node = ox.get_nearest_node(Graph, target)
         self.route = ox.shortest_path(Graph, source_node, target_node, weight)
         return self.route
+
     
