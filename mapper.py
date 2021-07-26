@@ -1,11 +1,11 @@
 from pyrosm import OSM, get_data
 import osmnx as ox
-import osmium as osm
+#import osmium as osm
 import pandas as pd
 import urllib.request
 import os
 
-class OSMHandler(osm.SimpleHandler):
+'''class OSMHandler(osm.SimpleHandler):
     def __init__(self):
         osm.SimpleHandler.__init__(self)
         self.osm_data = []
@@ -41,7 +41,7 @@ class OSMHandler(osm.SimpleHandler):
         data_colnames = ['type', 'id', 'version', 'visible', 'ts', 'uid',
                  'user', 'chgset', 'ntags', 'tagkey', 'tagvalue']
         return pd.DataFrame(self.osm_data, columns=data_colnames).sort_values(by=['type', 'id', 'ts'])   
-
+'''
 class MapParser:
     def __init__(self, data):
         """
