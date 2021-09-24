@@ -59,11 +59,25 @@ class MapParser:
     def download_data(self,filename,url):
         if not os.path.exists(filename):
             filename, headers = urllib.request.urlretrieve(url,filename)  
+    
+    def __chunkit(self,df, chunk_size): 
+        num_chunks = len(df) // chunk_size
+        if len(df) % chunk_size != 0:
+            num_chunks += 1
+        for i in range(num_chunks):
+            yield df[i*chunk_size:(i + 1) * chunk_size]
+    
+    def download_chunks(self, df,filename,chunk_size):
+        i=0
+        for chunk in self.__chunkit(df, chunk_size):
+            print(f"writing chunk {i} to csv")
+            chunk.to_csv(f"{filename}-chunk-{i}.csv")
+            i+=1
 
-    def to_geojson(self):
+    def to_geojson(self,path):
         if self.bounded_data:
             return self.bounded_data.to_file(path, driver="GeoJSON")   
-        else
+        else:
             return self.osm_data.to_file(path, driver="GeoJSON")
 
 
