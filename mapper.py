@@ -55,6 +55,10 @@ class MapParser:
         self.bounded_data=None
         self.route=None
         self.Graph=None
+
+    def get_map_data(self, city_name , directory):
+        return get_data(city_name,directory=directory, update=True)
+            
  
     def download_data(self,filename,url):
         if not os.path.exists(filename):
@@ -67,7 +71,7 @@ class MapParser:
         for i in range(num_chunks):
             yield df[i*chunk_size:(i + 1) * chunk_size]
     
-    def download_chunks(self, df,filename,chunk_size):
+    def download_chunks(self, df,filename,chunk_size=50000):
         i=0
         for chunk in self.__chunkit(df, chunk_size):
             print(f"writing chunk {i} to csv")
