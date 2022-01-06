@@ -1,4 +1,4 @@
 pandas
 osmnx
-pyrosm
+pyrosm==0.6.0
 quart
